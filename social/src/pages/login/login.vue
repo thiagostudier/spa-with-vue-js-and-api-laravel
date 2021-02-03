@@ -6,9 +6,9 @@
         </span>
        <span slot="principal">
             <h2>Login</h2>
-            <input type="email" name="" placeholder="E-mail" id="">
-            <input type="password" name="" placeholder="Senha" id="">
-            <button class="btn">Entrar</button>        
+            <input type="email" name="" placeholder="E-mail" v-model="email">
+            <input type="password" name="" placeholder="Senha" v-model="password">
+            <button class="btn" v-on:click="login()">Entrar</button>        
             <router-link to="/cadastro" class="btn orange">Cadastro</router-link>
         </span> 
     </login-template>
@@ -29,5 +29,16 @@ export default {
         PublicarConteudo,
         LoginTemplate
     },
+    data(){
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    methods: {
+        login(){
+            
+        }
+    }
 }
 </script>
