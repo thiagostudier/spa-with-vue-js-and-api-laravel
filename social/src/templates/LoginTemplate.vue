@@ -3,9 +3,10 @@
   <span>
     <header>
       <navbar logo="Social" cor="green darken-1" url="/">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/login">Login</router-link></li>
-        <li><router-link to="/cadastro">Cadastro</router-link></li>
+        <li><router-link v-if="!user" to="/login">Login</router-link></li>
+        <li><router-link v-if="!user" to="/cadastro">Cadastro</router-link></li>
+        <li><router-link v-if="user" to="/perfil">{{user.name}}</router-link></li>
+        <li><a v-if="user" v-on:click="sair()">Sair</a></li>
       </navbar>
     </header>
     <main>
@@ -39,11 +40,31 @@ import GridVue from '@/components/layouts/GridVue';
 import CardMenu from '@/components/layouts/CardMenu';
 export default {
   name: 'LoginTemplate',
+  data(){
+    return{
+      user: false
+    }
+  },
   components: {
     Navbar,
     FooterVue,
     GridVue,
     CardMenu
+  },
+  created(){
+    let auth = sessionStorage.getItem('user');
+    // SE HOUVER UM USUÁRIO VALIDO
+    if(auth){
+      this.user = JSON.parse(auth);
+      this.$router.push('/');
+    }
+  },
+  methods:{
+    sair(){
+      sessionStorage.clear();
+      this.user = false;
+      this.$router.push('/login');
+    }
   }
 }
 </script>

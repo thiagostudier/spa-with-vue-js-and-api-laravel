@@ -31,3 +31,7 @@ COMANDOS:
 
 # no config/auth
 - 'driver' => 'passport' no api
+
+# install axios - dentro do frontend
+- npm install axios --save
+- import axios from 'axios' 

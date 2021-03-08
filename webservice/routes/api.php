@@ -25,6 +25,7 @@ Route::post('/cadastro', function (Request $request) {
         'password' => bcrypt($data['password'])
     ]);
     $user->token = $user->createToken($user->email)->accessToken;
+
     return $user;
 });
 
@@ -44,11 +45,9 @@ Route::post('/login', function (Request $request) {
     if(Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])){
         $user = auth()->user();
         $user->token = $user->createToken($user->email)->accessToken;
-        return $user;
     }else{
         return ['status'=>false];
     }
-
     return $user;
 });
 
